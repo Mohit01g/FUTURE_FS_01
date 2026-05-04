@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Full-Stack Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #060606;
+            --bg-light: #121212;
+            --accent: #00A3FF;
+            --accent-glow: rgba(0, 163, 255, 0.3);
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --nav-height: 80px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            padding-top: var(--nav-height);
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10%;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-logo { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.5rem; color: var(--accent); text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-link { text-decoration: none; color: var(--text-dim); font-size: 0.95rem; position: relative; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--text-main); }
+        .nav-link::after { content: ''; position: absolute; left: 0; bottom: -5px; width: 0; height: 2px; background: var(--accent); transition: 0.3s; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        /* Container & Sections */
+        .main-container { height: calc(100vh - var(--nav-height)); overflow-y: scroll; scroll-snap-type: y mandatory; }
+        section { height: calc(100vh - var(--nav-height)); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 10%; scroll-snap-align: start; position: relative; }
+
+        h1, h2 { font-family: 'Poppins', sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); background: linear-gradient(135deg, #fff 40%, #555); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
+        p { color: var(--text-dim); line-height: 1.6; max-width: 700px; margin-bottom: 2rem; }
+
+        /* PROFILE PHOTO AREA */
+        .profile-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin-bottom: 2rem;
+            padding: 5px;
+        }
+
+        .profile-blob {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent), #1affb2);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .profile-blob img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Buttons & Cards */
+        .btn { display: inline-block; color: var(--accent); text-decoration: none; font-weight: bold; border: 2px solid var(--accent); padding: 1rem 2.5rem; border-radius: 50px; transition: 0.3s; }
+        .btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px var(--accent-glow); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; width: 100%; max-width: 1200px; }
+        .card { background: var(--card-bg); padding: 2rem; border-radius: 15px; border: 1px solid var(--border); text-align: left; transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.05); }
+
+        /* Skills Progress */
+        .skill-bar { height: 6px; background: var(--border); border-radius: 3px; margin-top: 10px; overflow: hidden; }
+        .skill-progress { height: 100%; background: var(--accent); width: 0; transition: 1.5s; }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+        }
+
+        /* Form */
+        .contact-container { width: 100%; max-width: 600px; background: var(--card-bg); padding: 2rem; border-radius: 15px; text-align: left; }
+        .form-input { width: 100%; padding: 1rem; margin-top: 0.5rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#home" class="nav-logo">MOHIT</a>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#services" class="nav-link">Skills</a></li>
+            <li><a href="#work" class="nav-link">Work</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        
+        <!-- 1. HERO SECTION -->
+        <section id="home">
+            
+            <!-- STEP 1: CHANGE THE IMAGE SOURCE BELOW -->
+            <div class="profile-container">
+                <div class="profile-blob">
+                    
+                    <!-- REPLACE THE LINK BELOW WITH YOUR IMAGE FILE NAME -->
+                    <!-- Example: img src="my-photo.jpg" -->
+                    <img src="YOUR_IMAGE_HERE.jpg" alt="Profile Photo">
+
+                    
+                </div>
+            </div>
+            <!-- END OF PHOTO SECTION -->
+
+            <h1>Full-Stack Developer</h1>
+            <p>I build high-performance web applications with a focus on clean code and exceptional user experience.</p>
+            <a href="#work" class="btn">View My Work</a>
+        </section>
+
+        <!-- 2. ABOUT SECTION -->
+        <section id="about">
+            <h2>About Me</h2>
+            <div style="display: flex; gap: 40px; text-align: left; max-width: 1000px; align-items: center; flex-wrap: wrap; justify-content: center;">
+                <div style="flex: 1; min-width: 300px;">
+                    <p>I am a Computer Science student and developer specializing in building modern digital solutions. I focus on creating SEO-friendly, interactive, and scalable web applications.</p>
+                </div>
+                <div style="flex: 1; min-width: 300px; width: 100%;">
+                    <div style="margin-bottom: 15px;">Frontend (React) <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div></div>
+                    <div style="margin-bottom: 15px;">Backend (Node.js) <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div></div>
+                    <div style="margin-bottom: 15px;">Database (SQL/NoSQL) <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SERVICES SECTION -->
+        <section id="services">
+            <h2>Expertise</h2>
+            <div class="grid">
+                <div class="card"><h3>Frontend Dev</h3><p>Crafting beautiful, responsive interfaces using React and modern CSS.</p></div>
+                <div class="card"><h3>Backend Systems</h3><p>Building secure APIs and robust server-side logic with Node.js.</p></div>
+                <div class="card"><h3>Database Design</h3><p>Organizing data efficiently with MongoDB and MySQL.</p></div>
+            </div>
+        </section>
+
+        <!-- 4. WORK SECTION -->
+        <section id="work">
+            <h2>Recent Projects</h2>
+            <div class="grid">
+                <div class="card"><h3>Project One</h3><p>A full-stack e-commerce application.</p></div>
+                <div class="card"><h3>Project Two</h3><p>Interactive dashboard for data visualization.</p></div>
+            </div>
+        </section>
+
+        <!-- 5. CONTACT SECTION -->
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <div class="contact-container">
+                <form>
+                    <label>Name</label><input type="text" class="form-input" required>
+                    <label>Email</label><input type="email" class="form-input" required>
+                    <label>Message</label><textarea class="form-input" style="height:100px" required></textarea>
+                    <button type="submit" class="btn" style="width:100%">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const links = document.querySelectorAll('.nav-link');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                links.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
